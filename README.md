@@ -92,10 +92,9 @@ requests for information the aircraft already knows better than OPS.
 
 ## Settings and privacy
 
-Settings are stored as `FlightWire.json` in X-Plane's preferences directory,
-not in the plugin folder, so normal upgrades retain them. Existing
-`GPTBridge.json` and `GPTBridge_memory.json` files are migrated once and kept
-for rollback.
+Settings and current-flight memory are stored as `FlightWire.json` and
+`FlightWire_memory.json` in X-Plane's preferences directory, not in the plugin
+folder, so normal upgrades retain them.
 
 Credential fields are shielded after successful testing. Logs and bug reports
 are sanitized, but users must still review report content and must never share
