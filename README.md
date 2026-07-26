@@ -59,17 +59,19 @@ cross-platform credential store and protected runtime have been tested there.
 ## Installation
 
 1. Close X-Plane.
-2. Open the release ZIP.
-3. Copy its complete `PythonPlugins` folder into
+2. If `PI_GPTBridge.py` exists in
+   `X-Plane 12\Resources\plugins\PythonPlugins`, delete that obsolete file.
+3. Open the release ZIP.
+4. Copy its complete `PythonPlugins` folder into
    `X-Plane 12\Resources\plugins` and allow the folders to merge.
-4. Start X-Plane.
-5. Open **Plugins > FlightWire > Open FlightWire**.
-6. Open **SETTINGS > SERVICES**, enter the required Hoppie, SimBrief, and
+5. Start X-Plane.
+6. Open **Plugins > FlightWire > Open FlightWire**.
+7. Open **SETTINGS > SERVICES**, enter the required Hoppie, SimBrief, and
    OpenAI credentials, test them, and press **SAVE**. Add CheckWX only if used.
 
-The packaged runtime contains `PI_GPTBridge.py` and the `flightwire` folder.
-The legacy entrypoint filename is retained temporarily so an in-place update
-overwrites the old plugin rather than leaving two XPPython3 entrypoints.
+The packaged runtime contains `PI_FlightWire.py` and the `flightwire` folder.
+Removing the obsolete entrypoint before an update prevents XPPython3 from
+loading both the old and renamed plugins.
 
 Do not copy the complete ZIP into `PythonPlugins`; public documentation sits
 outside the installation folder. Close and restart X-Plane when updating.
@@ -120,10 +122,12 @@ such as the source IP. The version-policy Worker does not store or use it.
 
 ## Updating
 
-Close X-Plane, merge the new release ZIP's `PythonPlugins` folder into
-`X-Plane 12\Resources\plugins`, allow FlightWire files to be replaced, and
-restart X-Plane. Configuration and flight memory live outside the plugin
-folder and are retained. Do not distribute or copy `__pycache__` directories.
+Close X-Plane. If `PI_GPTBridge.py` remains in
+`X-Plane 12\Resources\plugins\PythonPlugins`, delete it. Merge the new release
+ZIP's `PythonPlugins` folder into `X-Plane 12\Resources\plugins`, allow
+FlightWire files to be replaced, and restart X-Plane. Configuration and flight
+memory live outside the plugin folder and are retained. Do not distribute or
+copy `__pycache__` directories.
 
 ## Documentation and testing
 
