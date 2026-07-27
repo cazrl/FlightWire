@@ -51,12 +51,12 @@ CheckWX is optional. Navigraph functionality remains unavailable until FlightWir
 
 ## Installation
 
-1. Close X-Plane.
-2. Remove the obsolete PI_GPTBridge.py entrypoint if it remains in X-Plane 12/Resources/plugins/PythonPlugins.
-3. Open the FlightWire release ZIP.
-4. Copy its complete PythonPlugins folder into X-Plane 12/Resources/plugins and allow the folders to merge.
-5. Start X-Plane and open Plugins > FlightWire > Open FlightWire.
-6. Open SETTINGS > SERVICES, enter and test the required credentials, then press SAVE.
+1. Install XPPython3. https://xppython3.readthedocs.io/en/latest/
+2. Copy the PythonPlugins folder from the release zip into X-Plane 12\Resources\plugins and overwrite.
+3. Start X-Plane.
+4. Open **Plugins > FlightWire > Open FlightWire**.
+5. Open **SETTINGS > SERVICES**, enter the required Hoppie, SimBrief, and
+   OpenAI credentials, test them, and press **SAVE**. Add CheckWX only if used.
 
 Do not copy the complete ZIP into PythonPlugins. Public documentation remains outside the installation folder. Restart X-Plane after every update.
 
