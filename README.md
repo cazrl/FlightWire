@@ -4,9 +4,7 @@ FlightWire brings a simulated airline operations and maintenance desk into the F
 
 Flightwire requires OpenAI API credit ($5 minimum) but consumes only cents per long-haul flight.
 
-**Current public-test version: v0.4.2-Beta_130**
-
-> A closed-beta cycle is currently being prepared for invited testers.
+> Currently being tested in closed-beta. Contact me with your github username if you want access.
 
 [View public releases](https://github.com/cazrl/FlightWire/releases)
 
