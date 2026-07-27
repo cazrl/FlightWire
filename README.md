@@ -2,9 +2,11 @@
 
 FlightWire brings a simulated airline operations and maintenance desk into the FlightFactor 777v2 ACARS workflow. It combines the SimBrief operational flight plan, live simulator context, Hoppie communications, deterministic operational logic, and concise AI-generated company replies.
 
+Flightwire requires OpenAI API credit ($5 minimum) but consumes only cents per long-haul flight.
+
 **Current public-test version: v0.4.2-Beta_130**
 
-> A new closed-beta cycle is being prepared for invited testers. Its first planned package is Beta B1. No Beta B1 package has been published yet, and the current public-test build remains Beta 130.
+> A closed-beta cycle is currently being prepared for invited testers.
 
 [View public releases](https://github.com/cazrl/FlightWire/releases)
 
