@@ -44,7 +44,7 @@ FlightWire deliberately avoids filling messages with advice the crew already kno
 - FlightFactor 777v2
 - Hoppie logon code
 - SimBrief username or user ID
-- OpenAI Platform API key with available API billing or credit
+- OpenAI Platform API key with available API billing or credit (uses tiny ammounts of credit per flight)
 - Internet access
 
 CheckWX is optional. Navigraph functionality remains unavailable until FlightWire receives and implements approved developer access. A ChatGPT subscription does not include OpenAI API credit.
