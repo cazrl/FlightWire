@@ -1,38 +1,24 @@
 # FlightWire
 
-FlightWire brings a simulated airline operations and maintenance desk into the FlightFactor 777v2 ACARS workflow. It combines the SimBrief operational flight plan, live simulator context, Hoppie communications, deterministic operational logic, and concise AI-generated company replies.
+FlightWire is an XPPython3 plugin for X-Plane 12 that turns the FlightFactor 777v2 free-text ACARS system into an interactive airline operations desk. It combines the current SimBrief flight plan, live aircraft state, operational services, and concise OpenAI-generated replies to make company communication feel useful throughout the flight.
 
-Flightwire requires OpenAI API credit ($5 minimum) but consumes only cents per long-haul flight.
+Current open-beta version: **v0.5.0-Beta_B2**
 
-> Currently being tested in closed-beta. Contact me with your github username if you want access.
-
-[View public releases](https://github.com/cazrl/FlightWire/releases)
+FlightWire is beta software for entertainment and flight simulation only. It is not real-world ATC, dispatch, maintenance, safety, or operational authority.
 
 ## Highlights
 
-- Turns the FF777v2 free-text ACARS workflow into a context-aware virtual airline OPS and maintenance desk.
-- Builds replies from the actual flight: SimBrief OFP data, aircraft state, flight phase, position, fuel, timing, weather context, and the conversation already in progress.
-- Provides practical operational support for diversions, ETOPS changes, EETA updates, fuel deviations, arrival and alternate weather concerns, defects, and requested follow-ups.
-- Adds optional Auto-OPS contacts that are spread naturally across the flight instead of repeating at fixed intervals, while contacting OpenAI only when a message actually needs to be written.
-- Keeps the pilot in control through the Response Manager, where planned follow-ups can be reviewed, edited, delayed, cancelled, or sent manually.
-- Presents a dedicated operations workstation with a one-page LIDO-style FPL view, live flight overview, diagnostic LOG, selectable message text, and BRIGHT, DARK, and AUTO display modes.
-- Records OOOI events, defects, messages, manual and autopilot time, and API usage for an optional end-of-flight operations report.
-- Protects saved credentials with Windows DPAPI and sanitizes logs and reports before they leave the simulator.
+- **Interactive company ACARS:** exchange free-text messages with an OPS desk that understands the active flight, current phase, aircraft state, recent conversation, retained crew updates, and open operational items.
+- **Useful automatic operations support:** Auto-OPS schedules occasional, non-repetitive company contacts across the flight and avoids routine messages when there is nothing useful to say.
+- **Dedicated support functions:** independent controls provide ATC, weather, fuel, divert, and ETOPS monitoring when the required data is available.
+- **Operational awareness:** FlightWire uses SimBrief route and navlog data, live FF777v2 data, worldwide SIGMET information, optional CheckWX weather, and VATSIM sector/radio data without repeatedly sending the full OFP to OpenAI.
+- **Focused fuel monitoring:** planned-versus-actual fuel checks are designed to alert only when the developing arrival-fuel situation becomes operationally serious, with a minimum two-hour alert cooldown.
+- **Flight plan and progress tools:** the FPL page presents the data FlightWire has loaded, while route progress and OPS WATCH provide a quick view of the current operational picture.
+- **Response control:** the Response Manager lets the user inspect, edit, delay, cancel, or send planned messages. Optional response settings adjust style without changing the default behavior.
+- **Flight records and reporting:** OOOI times, manual and autopilot time, defects, significant events, messages, and API usage can be retained in an aviation-style post-flight report.
+- **Built-in diagnostics:** bounded rotating logs and sanitized bug reports provide useful troubleshooting information while shielding configured credentials.
 
-## Native aircraft support
-
-FlightWire currently supports the **FlightFactor 777v2** natively. It is built around that aircraft's free-text ACARS workflow and live simulator data. Other aircraft are not advertised as supported because they do not provide the same integration.
-
-## From dispatch release to flight closure
-
-- Loads the latest SimBrief OFP when FlightWire starts and retains it until the pilot deliberately fetches a replacement.
-- Uses flight phase and aircraft state to keep responses relevant during preflight, departure, cruise, arrival, and shutdown.
-- Can provide deterministic dispatch clearance, ETOPS following, divert assistance, EETA retention, fuel-deviation advisories, and supported scheduled follow-ups.
-- Can monitor CheckWX arrival and alternate conditions when the optional service is configured.
-- Suppresses Auto-OPS distractions during sterile takeoff and approach phases.
-- Creates an optional post-flight operations report in a user-selected folder.
-
-FlightWire deliberately avoids filling messages with advice the crew already knows, such as generic reminders to contact ATC or monitor the aircraft.
+FlightWire currently supports the FlightFactor 777v2 natively. Other aircraft do not provide the same free-text ACARS workflow and are not advertised as supported.
 
 ## Requirements
 
@@ -42,48 +28,80 @@ FlightWire deliberately avoids filling messages with advice the crew already kno
 - FlightFactor 777v2
 - Hoppie logon code
 - SimBrief username or user ID
-- OpenAI Platform API key with available API billing or credit (uses tiny ammounts of credit per flight)
+- OpenAI Platform API key with available API billing or credit
 - Internet access
+- Optional CheckWX API key
 
-CheckWX is optional. Navigraph functionality remains unavailable until FlightWire receives and implements approved developer access. A ChatGPT subscription does not include OpenAI API credit.
+Navigraph integration is prepared but unavailable until FlightWire receives developer credentials. Its UI status remains `PLANNED` and dependent values show `N/A`.
+
+A ChatGPT subscription does not include OpenAI API credit. The beta is Windows-only because saved credentials use Windows DPAPI protection.
 
 ## Installation
 
-1. Install XPPython3. https://xppython3.readthedocs.io/en/latest/
-2. Copy the PythonPlugins folder from the release zip into X-Plane 12\Resources\plugins and overwrite.
+1. Install [XPPython3](https://xppython3.readthedocs.io/en/latest/).
+2. Copy the `PythonPlugins` folder from the release ZIP into `X-Plane 12\Resources\plugins` and overwrite when prompted.
 3. Start X-Plane.
 4. Open **Plugins > FlightWire > Open FlightWire**.
-5. Open **SETTINGS > SERVICES**, enter the required Hoppie, SimBrief, and
-   OpenAI credentials, test them, and press **SAVE**. Add CheckWX only if used.
+5. Open **SETTINGS > SERVICES**, enter the required Hoppie, SimBrief, and OpenAI credentials, test them, and press **SAVE**. Add CheckWX only if used.
 
-Do not copy the complete ZIP into PythonPlugins. Public documentation remains outside the installation folder. Restart X-Plane after every update.
+The release contains the installable `PythonPlugins` folder and documentation. Copy the `PythonPlugins` folder itself into `X-Plane 12\Resources\plugins`; do not copy the complete release ZIP into the simulator folder. Close and restart X-Plane when updating FlightWire.
 
-## Services, privacy, and cost
+## How to use
 
-FlightWire polls Hoppie without contacting OpenAI. The OpenAI API is used only when a company message actually needs to be written. Per-message token and cost information is recorded in LOG, and the user can configure a session spending limit.
+1. Create the intended SimBrief OFP before starting X-Plane. FlightWire loads the latest plan once when the plugin starts.
+2. Open FlightWire and confirm the callsign, route, alternate, fuel, and plan information on **MAIN** or **FPL**.
+3. On the FF777v2 COMM page, send a free-text Hoppie message to the private OPS station shown on MAIN. The default station is the full callsign plus the configured desk suffix, for example `BOX123MX`.
+4. Leave **AUTO-OPS** and any wanted support functions enabled. Unavailable functions are marked `N/A` and do not run.
+5. Use **FETCH FPL** only after generating a new or revised SimBrief OFP. FlightWire otherwise retains the loaded plan for the flight.
+6. Use the large OPS station button to pause or resume all online FlightWire activity. A long pause does not create a backlog of missed messages.
+7. Open **RESPONSE MANAGER** to review, edit, delay, cancel, or immediately send a planned response.
+8. Use **LOG** for troubleshooting. Use **BUG REPORT** from Settings when a technical problem needs to be submitted, and review the sanitized report before sending it.
+9. At the end of the flight, FlightWire can export its post-flight report to the folder selected under report settings.
 
-Saved credentials are shielded in the UI and protected locally with Windows DPAPI. Logs and bug reports are sanitized, but every report must still be reviewed before submission. Never share FlightWire.json, API keys, or Hoppie credentials.
+Hoppie polling does not contact OpenAI. OpenAI is used only when FlightWire actually needs to generate a message.
 
-Version authorization sends the FlightWire release identity but no callsign, flight plan, credential, or installation identifier. Existing Beta 129/130 builds, future Beta B releases, and private Alpha tests use independent authorization sequences.
+## Support functions
 
-FlightWire is beta software for entertainment and flight simulation only. It is not real-world ATC, dispatch, maintenance, safety, or operational authority.
+- **ATC Support:** checks whether the active callsign is on VATSIM and whether COM1 or COM2 matches relevant sector coverage before issuing a bounded advisory.
+- **WXR Support:** combines CheckWX arrival and alternate checks with low-frequency domestic and international SIGMET monitoring along the remaining route. It does not determine active runways or landing minima.
+- **Fuel Support:** compares reliable SimBrief/navlog planning against actual fuel and warns only when a credible arrival-fuel emergency risk develops. Alerts have a minimum two-hour cooldown.
+- **Divert Support:** retains phase-appropriate candidates, crew decisions, reasons, weather and fuel context, and follow-ups without pretending to make the command decision.
+- **ETOPS Support:** follows usable SimBrief ETP sectors and reports a primary-divert change when the equal-time point is crossed.
 
-## Development status
+## OpenAI cost estimates
 
-- The current public-test information and releases remain in this repository.
-- The next external testing cycle will begin privately with Beta B1.
-- No closed-beta or public Beta B1 release has been published yet.
-- Future public releases will continue the Beta B sequence after closed testing.
-- User-facing plans are listed in the [roadmap](ROADMAP.md).
+These projections represent a 12-hour flight with all FlightWire features enabled. Actual usage depends on the number and complexity of generated messages, the selected model, and current OpenAI pricing.
 
-## Support
+| Model | Predicted flight cost |
+|---|---:|
+| GPT-4o mini | ~$0.0018 |
+| GPT-4.1 mini - default | **~$0.0049** |
+| GPT-5.6 Luna | ~$0.0137 |
+| GPT-5.6 Terra | ~$0.0342 |
+| GPT-5.6 Sol | ~$0.0683 |
 
-Use the in-simulator BUG REPORT function for a sanitized technical report. For general enquiries or when the relay is unavailable, contact **connect.flightwire@gmail.com**.
+The model selector normally shows only suitable models returned for the entered OpenAI account. If model discovery is unavailable, FlightWire offers only the conservative GPT-4.1 mini and GPT-4o mini fallback choices. The optional per-flight API limit defaults to `$0.10`.
 
-If FlightWire adds something to your flights, you can support development at [Ko-fi](https://ko-fi.com/flightwire).
+## Settings, storage, and privacy
+
+Settings and current-flight memory are stored as `FlightWire.json` and `FlightWire_memory.json` in X-Plane's preferences directory, outside the plugin folder, so normal updates retain them. Never publish `FlightWire.json`.
+
+Credential fields are shielded after successful testing. Logs and bug reports are sanitized for common credentials, personal paths, and email addresses, but users must still review report content. Diagnostic files rotate at 5 MiB with two backups.
+
+Public Beta B builds use an independent remote version-policy lane. A check sends only the FlightWire version and never a callsign, credential, flight plan, or installation identifier. A successful check creates a seven-day Windows-DPAPI-protected authorization lease and is normally rechecked every 12 hours. A retired build disables FlightWire operational networking while keeping X-Plane, the local UI, LOG, and bug reporting available.
+
+GitHub and Ko-fi shortcut squares are active. Reserved X-Plane.org and Discord squares are visibly inactive until destinations are published.
+
+## Documentation
+
+The user manual and changelog are included in the downloadable release ZIP.
 
 ## Licence
 
-Current FlightWire builds are distributed under the FlightWire Personal Use License 1.0 included with the release. Personal, non-commercial use is permitted. Redistribution, resale, rebranding, commercial use, and publishing modified versions require prior written permission.
+FlightWire is distributed under the **FlightWire Personal Use License 1.0**. Personal, non-commercial use is permitted. Redistribution, resale, rebranding, commercial use, and publishing modified versions require prior written permission. See [LICENSE](LICENSE).
 
-The historical v0.3.0-alpha release remains under the MIT License that accompanied that specific release.
+The historical `v0.3.0-alpha` release remains under the MIT License that accompanied that specific release.
+
+## Support
+
+Use the in-simulator **BUG REPORT** function for a sanitized technical report. For general enquiries or when the relay is unavailable, contact **connect.flightwire@gmail.com**.
