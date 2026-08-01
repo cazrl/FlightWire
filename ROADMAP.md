@@ -16,5 +16,8 @@ These are planned directions for FlightWire. They are not listed in a fixed deve
 - **VATSIM awareness**  
   Explore VATSIM integration so FlightWire can better understand relevant online ATC coverage and aircraft radio usage.
 
+- **Zibo 737 integration**  
+  Explore a native AOC company-message page so Zibo pilots can communicate with FlightWire directly through the FMC. This depends on a supported integration path and permission from the Zibo developers.
+
 - **Automatic updates**  
   Investigate using SkunkCrafts Updater to make future FlightWire updates easier while preserving user settings.
