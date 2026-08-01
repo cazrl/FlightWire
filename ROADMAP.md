@@ -1,23 +1,35 @@
 # FlightWire Roadmap
 
-These are planned directions for FlightWire. They are not listed in a fixed development order, and details may change during testing.
+These are planned directions for FlightWire. They are not promises for a particular release or listed in a fixed development order. Features will only be advertised as supported after successful flight testing.
 
-## Planned improvements
-
-- **Richer flight-phase awareness**  
-  Improve how FlightWire recognizes parked, taxi, takeoff, climb, cruise, descent, approach, landing, and taxi-in phases.
-
-- **Started-in-air recovery**  
-  Allow FlightWire to establish the correct flight context when it is started or reloaded after departure.
-
-- **Pinned flight notes**  
-  Let pilots ask OPS to remember important information for the remainder of the current flight.
-
-- **VATSIM awareness**  
-  Explore VATSIM integration so FlightWire can better understand relevant online ATC coverage and aircraft radio usage.
+## Aircraft compatibility
 
 - **Zibo 737 integration**  
-  Explore a native AOC company-message page so Zibo pilots can communicate with FlightWire directly through the FMC. This depends on a supported integration path and permission from the Zibo developers.
+  Bring FlightWire messaging to the Zibo FMC through a dedicated **AOC → Company Message** page, subject to permission and a supported integration path from the Zibo developers.
+
+- **Additional aircraft support**  
+  Expand FlightWire to more X-Plane aircraft that provide a reliable two-way company-message workflow. Every aircraft will be individually tested before being advertised as supported.
+
+## Company messaging
+
+- **Interactive company responses**  
+  Investigate cockpit **ACCEPT** and **REJECT** controls for suitable OPS messages. FlightWire will only use AOC/company functionality—never ATC CPDLC controls or simulated ATC clearances.
+
+- **Pinned flight notes**  
+  Allow pilots to ask OPS to retain important operational information for the remainder of the flight.
+
+## Operational data
+
+- **Navigraph integration**  
+  Add optional Navigraph authorization and use approved navigation data to strengthen route, airport, position and diversion context.
+
+- **Installed-airport awareness**  
+  Recognize installed add-on airports so diversion support can account for the airports and scenery actually available to the user.
+
+- **VAMSYS and Pegasus integration**  
+  Explore an optional, supported connection for virtual-airline users without unreliable process scanning or interfering with existing flight tracking.
+
+## Distribution
 
 - **Automatic updates**  
-  Investigate using SkunkCrafts Updater to make future FlightWire updates easier while preserving user settings.
+  Investigate SkunkCrafts Updater integration so FlightWire can be updated more easily while preserving credentials and user settings.
