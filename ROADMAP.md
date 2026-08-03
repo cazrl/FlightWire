@@ -15,6 +15,9 @@ These are planned directions for FlightWire. They are not promises for a particu
 - **Interactive company responses**  
   Investigate cockpit **ACCEPT** and **REJECT** controls for suitable OPS messages. FlightWire will only use AOC/company functionality—never ATC CPDLC controls or simulated ATC clearances.
 
+- **Companion datalink mirroring**  
+  Explore a safe way for the Mobile Companion to display messages received directly through the aircraft's Hoppie channel, including controller datalink messages, without competing with the aircraft's own Hoppie client or consuming messages before they reach the cockpit.
+
 - **Pinned flight notes**  
   Allow pilots to ask OPS to retain important operational information for the remainder of the flight.
 
