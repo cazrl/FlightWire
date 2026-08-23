@@ -10,6 +10,11 @@ These are planned directions for FlightWire. They are not promises for a particu
 - **Additional aircraft support**  
   Expand FlightWire to more X-Plane aircraft that provide a reliable two-way company-message workflow. Every aircraft will be individually tested before being advertised as supported.
 
+## Training scenarios
+
+- **Failure Scenario Director**  
+  Develop curated, multi-stage abnormal and emergency scenarios that build through related faults, secondary consequences and limited distractions instead of arbitrary random failures. Hot Start CL650 support can use its documented external failure controls; FF777v2 support depends on a stable, supported native scenario interface.
+
 ## Company messaging
 
 - **Interactive company responses**  
